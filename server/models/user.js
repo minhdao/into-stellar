@@ -7,6 +7,69 @@ const bcryptjs = require('bcryptjs');
 
 // user schema for User model
 var UserSchema = new mongoose.Schema({
+    giv_name: {
+        type: String,
+        required: true,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    mid_name: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    fam_name: {
+        type: String,
+        required: true,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    phone: {
+        type: Number,
+        required: true,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    socialIdNum: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: true,
+    },
+    bankName: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    bankAccountNum: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    bankAccountName: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
+    bankCity: {
+        type: String,
+        required: false,
+        minLength: 1,
+        trim: true,
+        unique: false,
+    },
     email: {
         type: String,
         required: true,
