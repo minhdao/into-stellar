@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 const _ = require('lodash');
+const hbs = require('hbs');
 
 // load in/import the mongoose
 var {mongoose} = require('./db/mongoose.js');
@@ -14,7 +15,10 @@ var {authenticate} = require('./middleware/authenticate.js');
 
 var app = express();
 
-// middleware
+// express setings
+app.set('view engine', 'hbs'); // use handle bars as view engine
+
+// express middleware
 app.use(bodyParser.json()); // take json -> object
 
 // routes config
