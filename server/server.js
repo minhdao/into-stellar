@@ -110,8 +110,9 @@ app.patch('/todos/:id',authenticate, (req, res) => {
     });
 });
 
+// take inputs and create user
 app.post('/users', (req, res) => {
-    // create todo model object
+    // create user model object
     var body = _.pick(req.body, ['email', 'password']);
     var user = new User(body);
 
