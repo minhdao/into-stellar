@@ -15,11 +15,22 @@ var {authenticate} = require('./middleware/authenticate.js');
 
 var app = express();
 
+// register partials
+hbs.registerPartials(__dirname + '/views/partials');
+
 // express setings
+app.set('views', __dirname + '/views'); // change default location of views dir
 app.set('view engine', 'hbs'); // use handle bars as view engine
 
 // express middleware
 app.use(bodyParser.json()); // take json -> object
+
+app.get('/view/register', (req, res) => {
+    res.render('home.hbs', {
+        pageName: 'welcome home',
+        content: 'home sweet home',
+    });
+});
 
 // routes config
 app.post('/todos',authenticate, (req, res) => {
