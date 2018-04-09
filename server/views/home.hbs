@@ -11,11 +11,48 @@
     <body>
         {{> header}}
         <h1>Register page</h1>
+        <!-- register form -->
         <form action="/register" method="POST">
-            <label for="team_name">Enter name: </label>
-            <input id="team_name" type="text" name="team_name" value="Default name for team.">
+            <!-- User info -->
+            <label for="giv_name">Given Name: </label>
+            <input id="giv_name" type="text" name="giv_name" value=""> <br>
+
+            <label for="mid_name">Middle Name: </label>
+            <input id="mid_name" type="text" name="mid_name" value=""> <br>
+
+            <label for="fam_name">Family Name: </label>
+            <input id="fam_name" type="text" name="fam_name" value=""> <br>
+
+            <label for="phone">Phone: </label>
+            <input id="phone" type="text" name="phone" value=""> <br>
+
+            <label for="socialIdNum">ID Number: </label>
+            <input id="socialIdNum" type="text" name="socialIdNum" value=""> <br>
+
+            <label for="bankName">Bank Name: </label>
+            <input id="bankName" type="text" name="bankName" value=""> <br>
+
+            <label for="bankAccountNum">Bank Account: </label>
+            <input id="bankAccountNum" type="text" name="bankAccountNum" value=""> <br>
+
+            <label for="bankAccountName">Bank Account Name: </label>
+            <input id="bankAccountName" type="text" name="bankAccountName" value=""> <br>
+
+            <label for="bankCity">Bank City: </label>
+            <input id="bankCity" type="text" name="bankCity" value=""> <br>
+
+            <label for="email">Email: </label>
+            <input id="email" type="text" name="email" value=""> <br>
+
+            <label for="password">Password: </label>
+            <input id="password" type="password" name="password" value=""> <br>
+            <label for="password">Retype Password: </label>
+            <input id="password" type="password" name="password" value=""> <br>
+
+            <!-- Submit button -->
             <input type="submit" name="submit" value="OK">
         </form>
+
         {{> footer}}
     </body>
 </html>
