@@ -24,12 +24,18 @@ app.set('view engine', 'hbs'); // use handle bars as view engine
 
 // express middleware
 app.use(bodyParser.json()); // take json -> object
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/view/register', (req, res) => {
+app.get('/register', (req, res) => {
     res.render('home.hbs', {
         pageName: 'welcome home',
         content: 'home sweet home',
     });
+});
+
+app.post('/register', (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
 });
 
 // routes config
