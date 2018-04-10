@@ -34,8 +34,19 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
+    console.log('POST register');
+    var body = _.pick(
+        req.body,
+        ['giv_name', 'mid_name', 'fam_name', 'phone',
+        'socialIdNum', 'bankName', 'bankAccountNum',
+        'bankAccountName', 'bankCity', 'email', 'password']
+    );
+    var user = new User(body);
+    user.genAuthToken().then((token) => {
+        res.header('x-auth', token).send(user.tailorData());
+    }).catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 // routes config
