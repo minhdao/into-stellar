@@ -29,7 +29,7 @@ var users = [{
     tokens: [
         {
             access:'auth',
-            token: jwt.sign({_id: userOneId, access: 'auth'}, process.env.JWT_SECRET).toString()
+            token: jwt.sign({_id: userOneId, access: 'auth'}, process.env.JWT_SECRET_AUTH).toString()
         }
     ]
 }, {
@@ -39,7 +39,7 @@ var users = [{
     tokens: [
         {
             access:'auth',
-            token: jwt.sign({_id: userTwoId, access: 'auth'}, process.env.JWT_SECRET).toString()
+            token: jwt.sign({_id: userTwoId, access: 'auth'}, process.env.JWT_SECRET_AUTH).toString()
         }
     ]
 }];
