@@ -88,6 +88,11 @@ var UserSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    activated: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
     tokens: [
         {
             access:{
@@ -125,6 +130,20 @@ UserSchema.methods.genAuthToken = function () {
     var user = this;
     var access = 'auth';
     var raw_sauce = process.env.JWT_SECRET;
+    var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
+    user.tokens = user.tokens.concat([{access, token}]);
+    return user.save().then(() => {
+        return token;
+    });
+};
+
+// user instance method to create activation token
+// do NOT user arrow func since this binding needed
+UserSchema.methods.genActToken = function () {
+    // make it clearer when assign 'this' to a specific variable
+    var user = this;
+    var access = 'act';
+    var raw_sauce = process.env.JWT_SECRET + 'act';
     var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
     user.tokens = user.tokens.concat([{access, token}]);
     return user.save().then(() => {

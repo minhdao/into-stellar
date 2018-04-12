@@ -42,8 +42,12 @@ app.post('/register', (req, res) => {
         'bankAccountName', 'bankCity', 'email', 'password']
     );
     var user = new User(body);
-    user.genAuthToken().then((token) => {
-        res.header('x-auth', token).send(user.tailorData());
+    user.genAuthToken().then((authToken) => {
+        res.header('x-auth', authToken);
+        user.genActToken().then((actToken) => {
+            console.log(actToken);
+            res.send(user.tailorData());
+        });
     }).catch((error) => {
         res.status(400).send(error);
     });
