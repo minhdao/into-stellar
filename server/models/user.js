@@ -124,33 +124,40 @@ UserSchema.pre('save', function (next) {
 });
 
 // user instance method to create auth token
-// do NOT user arrow func since this binding needed
-UserSchema.methods.genAuthToken = function () {
-    // make it clearer when assign 'this' to a specific variable
-    var user = this;
-    var access = 'auth';
-    var raw_sauce = process.env.JWT_SECRET_AUTH;
-    var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
-    user.tokens = user.tokens.concat([{access, token}]);
-    return user.save().then(() => {
-        return token;
-    });
-};
+// do NOT use arrow func since this binding needed
+// UserSchema.methods.genAuthToken = function () {
+//     // make it clearer when assign 'this' to a specific variable
+//     var user = this;
+//     var access = 'auth';
+//     var raw_sauce = process.env.JWT_SECRET_AUTH;
+//     var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
+//     user.tokens = user.tokens.concat([{access, token}]);
+//     return user.save().then(() => {
+//         return token;
+//     });
+// };
+//
+// // user instance method to create activation token
+// // do NOT use arrow func since this binding needed
+// UserSchema.methods.genActToken = function () {
+//     // make it clearer when assign 'this' to a specific variable
+//     var user = this;
+//     var access = 'act';
+//     var raw_sauce = process.env.JWT_SECRET_ACTV;
+//     var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
+//     user.tokens = user.tokens.concat([{access, token}]);
+//     return user.save().then(() => {
+//         return token;
+//     });
+// };
 
-// user instance method to create activation token
-// do NOT user arrow func since this binding needed
-UserSchema.methods.genActToken = function () {
-    // make it clearer when assign 'this' to a specific variable
-    var user = this;
-    var access = 'act';
-    var raw_sauce = process.env.JWT_SECRET_ACTV;
-    var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
-    user.tokens = user.tokens.concat([{access, token}]);
-    return user.save().then(() => {
-        return token;
-    });
-};
 
+/**
+ * anonymous function - Generate token for specific user
+ *
+ * @param  {type} type Type of token need to be generated
+ * @return {type}      A Promise with the token created 
+ */
 UserSchema.methods.genToken = function (type) {
     var user = this;
     var access = '';
@@ -158,8 +165,8 @@ UserSchema.methods.genToken = function (type) {
 
     if (type === 'auth') {
         access = 'auth';
-    }else if (type === 'act'){
-        access = 'act';
+    }else if (type === 'actv'){
+        access = 'actv';
     }
 
     var token = jwt.sign({_id: user._id.toHexString(), access}, raw_sauce).toString();
