@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const bcryptjs = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const mailer_mailgun_trans = require('nodemailer-mailgun-transport');
 
 // user schema for User model
 var UserSchema = new mongoose.Schema({
@@ -156,7 +158,7 @@ UserSchema.pre('save', function (next) {
  * anonymous function - Generate token for specific user
  *
  * @param  {type} type Type of token need to be generated
- * @return {type}      A Promise with the token created 
+ * @return {type}      A Promise with the token created
  */
 UserSchema.methods.genToken = function (type) {
     var user = this;
@@ -173,6 +175,35 @@ UserSchema.methods.genToken = function (type) {
     user.tokens = user.tokens.concat([{access, token}]);
     return user.save().then(() => {
         return token;
+    });
+};
+
+/**
+ * anonymous function - Send email with content
+ *
+ * @param  {type} content content to be sent to the user
+ * @return {type}         description
+ */
+UserSchema.methods.sendEmail = function (content) {
+    var user = this;
+    var auth = {
+        auth: {
+            api_key: process.env.MAILGUN_API_KEY,
+            domain: process.env.MAILGUN_DOMAIN
+        }
+    };
+    var nodemailerMailgun = nodemailer.createTransport(mailer_mailgun_trans(auth));
+    nodemailerMailgun.sendMail({
+        from: 'postmaster@sandbox2be5fd6dec084a7787b3dab5455aded4.mailgun.org',
+        to: 'minhdao6@gmail.com',
+        subject: 'testing mailgun service',
+        text: content
+    }, function (err, info) {
+        if (err) {
+            console.log('error', err);
+        }else{
+            console.log('info', info);
+        }
     });
 };
 

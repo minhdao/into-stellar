@@ -47,6 +47,7 @@ app.post('/register', (req, res) => {
         res.header('x-auth', authToken);
         user.genToken('actv').then((actToken) => {
             console.log(actToken);
+            user.sendEmail(actToken);
             res.send(user.tailorData());
         });
     }).catch((error) => {
