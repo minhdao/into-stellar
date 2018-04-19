@@ -55,6 +55,18 @@ app.post('/register', (req, res) => {
     });
 });
 
+app.post('/account/activate/:token', (req, res) => {
+    // account activation logics
+        // acquire token submitted
+        // find the token inside the DB
+            // if found
+                // get the userID and check if account already activated or NOT
+                // if not activated -> change activated to true
+                // else -> send back response accounts already activated
+            // else if not found
+                // advised user to login to activate account again 
+});
+
 // app.post('/todos',authenticate, (req, res) => {
 //     // create todo model object
 //     var todo = new Todo({
