@@ -64,7 +64,17 @@ app.post('/account/activate/:token', (req, res) => {
                 // if not activated -> change activated to true
                 // else -> send back response accounts already activated
             // else if not found
-                // advised user to login to activate account again 
+                // advised user to login to activate account again
+    let token = req.params.token;
+    User.findByToken('actv', token).then((user) => {
+        if (!user) {
+            return Promise.reject();
+        }
+        console.log(user);
+        res.status(200).send('account found');
+    }).catch((error) => {
+        res.status(401).send();
+    });
 });
 
 // app.post('/todos',authenticate, (req, res) => {

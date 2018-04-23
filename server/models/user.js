@@ -163,7 +163,12 @@ UserSchema.pre('save', function (next) {
 UserSchema.methods.genToken = function (type) {
     var user = this;
     var access = '';
-    var raw_sauce = process.env.JWT_SECRET_AUTH;
+    var raw_sauce = '';
+    if (type === 'auth') {
+        raw_sauce = process.env.JWT_SECRET_AUTH;
+    }else if (type === 'actv'){
+        raw_sauce = process.env.JWT_SECRET_ACTV;
+    }
 
     if (type === 'auth') {
         access = 'auth';
@@ -224,23 +229,29 @@ UserSchema.methods.tailorData = function () {
 };
 
 // Model method to find user by Token
-UserSchema.statics.findByToken = function (token) {
+UserSchema.statics.findByToken = function (type, token) {
     var User = this;
     var decoded;
+    var secret;
+
+    if (type === 'auth') {
+        secret = process.env.JWT_SECRET_AUTH;
+    }else if (type === 'actv'){
+        secret = process.env.JWT_SECRET_ACTV;
+    }
 
     try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET_AUTH);
+        decoded = jwt.verify(token, secret);
     } catch (e) {
-        // return new Promise((resolve, reject) => {
-        //     reject();
-        // });
-        return Promise.reject();
+        return Promise.reject(e);
     }
+
+    secret = null;
 
     return User.findOne({
         '_id': decoded._id,
         'tokens.token': token,
-        'tokens.access': 'auth'
+        'tokens.access': decoded.access
     });
 };
 
