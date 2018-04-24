@@ -71,6 +71,9 @@ app.post('/account/activate/:token', (req, res) => {
             return Promise.reject();
         }
         console.log(user);
+        User.update({_id: user._id}, {activated: true}, function (err, affected, resp) {
+            console.log(resp);
+        });
         res.status(200).send('account found');
     }).catch((error) => {
         res.status(401).send();
