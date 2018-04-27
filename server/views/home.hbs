@@ -3,56 +3,118 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title></title>
-        <script src="bootstrap/dist/js/bootstrap.js"></script>
+        <title>Into Stellar</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <!-- <script src="bootstrap/dist/js/bootstrap.js"></script>
         <link href="bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet" />
-        <link href="css/style.css" type="text/css" rel="stylesheet" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" /> -->
     </head>
-    <body>
+    <body class="bg-light">
         {{> header}}
-        <h1>Register page</h1>
         <!-- register form -->
-        <form action="/register" method="POST">
-            <!-- User info -->
-            <label for="giv_name">Given Name: </label>
-            <input id="giv_name" type="text" name="giv_name" value=""> <br>
+        <div class="container">
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <h2>Registration form</h2>
+                <p class="lead">Please fill in your information to register. Optional field are not required to register an account, but might be needed for some other features such as trading. Information provided here can be changed latter after you login your account.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/register" method="POST">
+                        <!-- User info -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <h4>Personal info</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="giv_name">Given name  </label>
+                                <input id="giv_name" type="text" name="giv_name" placeholder="Nguyen" value="" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mid_name">Middle name </label>
+                                <input id="mid_name" type="text" name="mid_name" value="" placeholder="Thai" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fam_name">Family name </label>
+                                <input id="fam_name" type="text" name="fam_name" value="" placeholder="Son" class="form-control"> <br>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label for="phone">Phone </label>
+                                <input id="phone" type="text" name="phone" value="" placeholder="01258783579" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="socialIdNum">ID number (optional)</label>
+                                <input id="socialIdNum" type="text" name="socialIdNum" value="" placeholder="014608493" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
 
-            <label for="mid_name">Middle Name: </label>
-            <input id="mid_name" type="text" name="mid_name" value=""> <br>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <h4>Bank info (optional)</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bankName">Bank name </label>
+                                <input id="bankName" type="text" name="bankName" value="" placeholder="Timo" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bankAccountNum">Bank account </label>
+                                <input id="bankAccountNum" type="text" name="bankAccountNum" value="" placeholder="384726238304" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bankAccountName">Account owner</label>
+                                <input id="bankAccountName" type="text" name="bankAccountName" value="" placeholder="Nguyen Thai Son" class="form-control"> <br>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label for="bankCity">Bank city </label>
+                                <input id="bankCity" type="text" name="bankCity" value="" placeholder="Khanh Hoa" class="form-control"> <br>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <h4>Account info</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">Email </label>
+                                <input id="email" type="text" name="email" value="" placeholder="moutain69@gmail.com" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="password">Password </label>
+                                <input id="password" type="password" name="password" value="" class="form-control"> <br>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="retype-password">Retype password </label>
+                                <input id="retype-password" type="password" name="password" value="" class="form-control"> <br>
+                            </div>
+                        </div>
+                        <div class="row form-group">
 
-            <label for="fam_name">Family Name: </label>
-            <input id="fam_name" type="text" name="fam_name" value=""> <br>
-
-            <label for="phone">Phone: </label>
-            <input id="phone" type="text" name="phone" value=""> <br>
-
-            <label for="socialIdNum">ID Number: </label>
-            <input id="socialIdNum" type="text" name="socialIdNum" value=""> <br>
-
-            <label for="bankName">Bank Name: </label>
-            <input id="bankName" type="text" name="bankName" value=""> <br>
-
-            <label for="bankAccountNum">Bank Account: </label>
-            <input id="bankAccountNum" type="text" name="bankAccountNum" value=""> <br>
-
-            <label for="bankAccountName">Bank Account Name: </label>
-            <input id="bankAccountName" type="text" name="bankAccountName" value=""> <br>
-
-            <label for="bankCity">Bank City: </label>
-            <input id="bankCity" type="text" name="bankCity" value=""> <br>
-
-            <label for="email">Email: </label>
-            <input id="email" type="text" name="email" value=""> <br>
-
-            <label for="password">Password: </label>
-            <input id="password" type="password" name="password" value=""> <br>
-            <!-- <label for="password">Retype Password: </label>
-            <input id="password" type="password" name="password" value=""> <br> -->
-
-            <!-- Submit button -->
-            <input type="submit" name="submit" value="OK">
-        </form>
-
+                        </div>
+                        <!-- Submit button -->
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <input class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Done">
+                            </div>
+                            <div class="col-md-3">
+                                <!-- <input class="btn btn-lg btn-danger btn-block" type="button" name="" value="CANCEL"> -->
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         {{> footer}}
     </body>
 </html>
